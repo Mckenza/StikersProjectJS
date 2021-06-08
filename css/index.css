@@ -1,0 +1,96 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+*::-webkit-scrollbar{
+    width: 0;
+}
+
+body{
+    background-color: rgba(233, 122, 229, 0.534);
+}
+
+/* header */
+
+header{
+    height: 50px;
+    max-width: 100%;
+    background-color: rgba(0, 0, 0, 0.137);
+}
+
+.logo{
+    max-width: 100%;
+    padding: 8px 0 8px 10px;
+}
+
+.logo span{
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+    
+}
+
+/* main */
+main{
+    height: 85vh;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.wrap_main{
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.left_control_panel{
+    height: 100%;
+    min-width: 300px;
+    width: 20%;
+    margin-right: 10px;
+    background-color: rgba(0, 0, 0, 0.137);
+}
+
+/* main - article */
+
+article{
+    height: 100%;
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.137);
+}
+
+.wrap_article{
+    max-height: calc(100% - 40px);
+    max-width: 100%;
+    margin: 20px;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.item_list{
+    height: 250px;
+    width: 25%;
+    min-width: 250px;
+    margin: 10px;
+    background-color: blue;
+}
+
+
+
+
+
+
+
+
+
+/* footer */
+
+footer{
+    height: 70px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.137);
+}
