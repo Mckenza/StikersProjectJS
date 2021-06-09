@@ -3,19 +3,30 @@
     margin: 0;
 }
 
+@font-face{
+    font-family: 'Pangolin Regular';
+    src: url(..//fonts/Pangolin-Regular.ttf);
+}
+
 *::-webkit-scrollbar{
     width: 0;
 }
 
 body{
-    background-color: rgba(233, 122, 229, 0.534);
+    height: 100vh;
+    width: 100%;
+    background-image: url(..//img/blackboard.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /* header */
 
 header{
     height: 50px;
-    max-width: 100%;
+    width: 1400px;
+    margin: 0 auto;
     background-color: rgba(0, 0, 0, 0.137);
 }
 
@@ -25,18 +36,18 @@ header{
 }
 
 .logo span{
-    font-size: 30px;
+    font-family: 'Pangolin Regular';
+    font-size: 40px;
     color: white;
-    font-weight: bold;
     
 }
 
 /* main */
 main{
     height: 85vh;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    width: 1400px;
+    margin: 10px auto;
+
 }
 
 .wrap_main{
@@ -48,9 +59,24 @@ main{
 .left_control_panel{
     height: 100%;
     min-width: 300px;
-    width: 20%;
+    width: 25%;
     margin-right: 10px;
-    background-color: rgba(0, 0, 0, 0.137);
+    background-color: rgba(0, 0, 0, 0.363);
+}
+
+/* main - left_control_panel */
+
+.create_new_task{
+    height: 100px;
+    width: 100%;
+}
+
+.create_new_task span{
+    display: block;
+    font-family: 'Pangolin Regular';
+    font-size: 40px;
+    color: white;
+    margin: 20px;
 }
 
 /* main - article */
@@ -72,8 +98,8 @@ article{
 }
 
 .item_list{
-    height: 250px;
-    width: 25%;
+    height: 300px;
+    width: 30%;
     min-width: 250px;
     margin: 10px;
     background-color: blue;
