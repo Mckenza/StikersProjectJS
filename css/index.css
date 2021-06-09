@@ -130,6 +130,57 @@ article{
     overflow: scroll;
 }
 
+/* modal window */
+
+.modal_window_create_new{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.582);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_window{
+    height: 300px;
+    width: 650px;
+    background-color: black;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.title_modal_window{
+    height: 17%;
+    width: 100%;
+
+}
+
+.body_modal_window{
+    height: 70%;
+    width: 100%;
+}
+
+.footer_modal_window{
+    height: 13%;
+    width: 100%;
+    position: relative;
+    
+}
+
+.buttons_footer_modal_window{
+    height: 80%;
+    float: right;
+}
+
+.buttons_footer_modal_window input{
+    height: 100%;
+    margin: 0 15px;
+}
+
 
 
 
