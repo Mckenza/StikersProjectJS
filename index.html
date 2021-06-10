@@ -23,8 +23,15 @@
                 <div class="body_modal_window">
     
                 </div>
-                <input type="button" id="cancel_modal">
-                <input type="button" id="add_modal">
+                <div class="wrap_add_modal_button">
+                    <input type="button" id="add_modal_id">
+                </div>
+                <div class="wrap_cancel_modal_button">
+                    <input type="button" id="cancel_modal_button">
+                </div>
+                
+                
+                
             </div>
         </div>
     </div>
@@ -32,8 +39,9 @@
         <div class="wrap_main">
             <div class="left_control_panel">
                 <div class="create_new_task">
-                    <div class="wrap_span"> 
+                    <div class="wrap_button"> 
                         <span>Создать</span>
+                        <input type="button" id="create_new_task_button">
                     </div>
                 </div>
                 <div class="last_task">
@@ -41,8 +49,22 @@
                 </div>
             </div>
             <article>
-                <div class="wrap_article">
-                    <div class="item_for_list">
+                <div class="wrap_article" id="list_elements">
+                    
+
+                </div>
+            </article>
+        </div>
+    </main>
+    <script src="javascript/index.js"></script>
+</body>
+</html>
+
+
+
+
+<!--
+    <div class="item_for_list">
                         <div class="title_item">
                             Сделать проект
                         </div>
@@ -114,11 +136,4 @@
                             Lorem ipsum dolor sit, asdfsadf sadf sdf  sdfsa sadg dfg fdg sasd gd fg dfg amilique dolore consequuntur at hic.
                         </div>
                     </div>
-
-                </div>
-            </article>
-        </div>
-    </main>
-        
-</body>
-</html>
+-->

@@ -76,12 +76,29 @@ main{
     align-items: center;
 }
 
-.create_new_task span{
-    display: block;
+.wrap_button{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.wrap_button input{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.wrap_button span{
     font-family: 'Pangolin Regular';
     font-size: 40px;
     color: white;
-    
 }
 
 /* main - article */
@@ -144,6 +161,7 @@ article{
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
 }
 
 .modal_window{
@@ -189,24 +207,35 @@ article{
     margin: 60px 0 0 60px;
 }
 
-#cancel_modal{
+.wrap_add_modal_button{
     height: 70px;
     width: 70px;
     position: absolute;
     right: 13px;
     bottom: -5px;
+    
+}
+
+.wrap_add_modal_button input{
+    height: 100%;
+    width: 100%;
     border: none;
     background-color: transparent;
 }
 
-#add_modal{
+.wrap_cancel_modal_button{
     height: 60px;
     width: 60px;
     position: absolute;
     top: -5px;
     right: -5px;
+}
+.wrap_cancel_modal_button input{
+    height: 100%;
+    width: 100%;
     border: none;
     background-color: transparent;
+    
 }
 
 
