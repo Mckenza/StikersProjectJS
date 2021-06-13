@@ -1,25 +1,33 @@
 class View {
 
-    modalWindow = document.querySelector('.modal_window_create_new');
     listDeals = document.getElementById('list_elements');
-    modalTitleText = document.getElementById('modal_title_id');
 
-    constructor() {
-        this.isViewModal = false;
-        this.setIsViewModal(this.isViewModal);
+    constructor(modalContext) {
+        this.modalContext = modalContext;
     }
 
-    /* Окно добавления новой задачи */
-    setIsViewModal(isView) {
-        if (isView) {
-            this.modalWindow.style.display = '';
-        } else {
-            this.modalWindow.style.display = 'none';
-        }
+    
+    /* показать модальное окно */
+    showModalWindow(){
+        this.modalContext.open();
+    }
+
+    /* скрыть модальное окно */
+    closeModalWindow(){
+        this.modalContext.close();
+    }
+
+    /* показать описание textArea */
+    showPlaceholderDescriptionModal(){
+        this.modalContext.showPlaceholderTextarea();
+    }
+
+     /* скрыть описание textArea */
+    hidePlaceholderDescriptionModal(){
+        this.modalContext.hidePlaceholderTextarea();
     }
 
     /* добавляем елемент списка заданий; data - объект 1 - заголовок, 2 - описание*/
-    
     addTask(data) {
         const divItem = document.createElement('div');
         divItem.setAttribute('class', 'item_for_list');

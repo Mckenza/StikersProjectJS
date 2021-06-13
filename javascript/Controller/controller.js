@@ -1,23 +1,30 @@
 import {View} from '/javascript/View/view.js';
 import {Model} from '/javascript/Model/model.js';
+import {ModalWindow} from '/javascript/ModalWindow/modalWindow.js';
 
 class Controller{
     createButton = document.getElementById('create_new_task_button');
-    modalWindowClose = document.getElementById('cancel_modal_button');
-    modalWindowAdd = document.getElementById('add_modal_id');
-    modalTitleText = document.getElementById('modal_title_id');
-
-    loremTest = 'Lorem ipsum doloksdh fglkdsjfh glkdsjfhg lkjdhsfglkhdsflkg hdlksf hglkdsfhglkdsfhg lksdfjh glor sit, asdfsadf sadf sdf  sdfsa sadg dfg fdg sasd gd fg dfg amilique dolore consequuntur at hic.';
 
     constructor(){
-        this.view = new View;
-        this.model = new Model;
+        this.model = new Model();
+        this.modalWindow = new ModalWindow();
+        this.view = new View(this.modalWindow);
+        this.modalWindowClose = document.getElementById('cancel_modal_button');
+        this.modalWindowAdd = document.getElementById('add_modal_id');
+        this.modalTitleText = document.getElementById('modal_title_id');
+        this.modalTextArea = document.getElementById('textarea_modal_id');
+        this.modalTextArea.value = '';                                          // для того, что б курсор, при вызове окна, был в самом углу
+        this.buttonCreate();
+        this.buttonAddItem();
+        this.buttonCancel();
+        this.textareaFocus();
     }
 
     /* слушатель кнопки "Создать" */
     buttonCreate(){
         this.createButton.onclick = ()=>{
-            this.view.setIsViewModal(true);
+            this._clearField();
+            this.view.showModalWindow();
         }
     }
 
@@ -26,18 +33,37 @@ class Controller{
         this.modalWindowAdd.onclick = ()=>{
             const objData = {};
             objData['title'] = this.modalTitleText.value;
-            objData['description'] = this.loremTest;
+            objData['description'] = this.modalTextArea.value;
             this.view.addTask(objData);
             this.model.setDataItem(objData);
-            this.view.setIsViewModal(false);
+            this._clearField();
+            this.modalWindow.close();
         }
     }
 
     /* слушатель кнопки "Отмена" */
     buttonCancel(){
         this.modalWindowClose.onclick = ()=>{
-            this.view.setIsViewModal(false);
+            this._clearField();
+            this.view.closeModalWindow();
         }
+    }
+
+    textareaFocus(){
+        this.modalTextArea.onfocus = ()=>{
+            this.view.hidePlaceholderDescriptionModal();
+        }
+        this.modalTextArea.onblur = ()=>{
+            if(this.modalTextArea.value === ''){
+                this.view.showPlaceholderDescriptionModal();
+            }
+        }
+    }
+    
+    _clearField(){
+        this.modalTextArea.value = '';
+        this.modalTitleText.value = '';
+        this.view.showPlaceholderDescriptionModal();
     }
 }
 
