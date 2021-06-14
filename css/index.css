@@ -145,11 +145,33 @@ article{
     top: 0;
     right: 0;
     z-index: 2;
+    display: flex;
+}
+
+.button_edit_item{
+    height: 30px;
+    width: 20px;
+    background-image: url(..//img/edit.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-right: 5px;
+}
+
+.button_delete_item{
+    height: 30px;
+    width: 20px;
+    background-image: url(..//img/cancel.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .buttons_manage input{
     height: 30px;
     width: 20px;
+    background-color: transparent;
+    border: none;
 }
 
 .title_item{
