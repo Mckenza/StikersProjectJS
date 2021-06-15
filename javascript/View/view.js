@@ -27,21 +27,9 @@ class View {
         this.modalContext.hidePlaceholderTextarea();
     }
 
-    /* добавляем елемент списка заданий; data - объект 1 - заголовок, 2 - описание*/
-    addTask(data) {
-        const divItem = document.createElement('div');
-        divItem.setAttribute('class', 'item_for_list');
-        const divTitle = document.createElement('div');
-        divTitle.setAttribute('class', 'title_item');
-        const divDescription = document.createElement('div');
-        divDescription.setAttribute('class', 'description_item');
-        divTitle.textContent = data['title'];
-        divDescription.textContent = data['description'];
-
-        divItem.appendChild(divTitle);
-        divItem.appendChild(divDescription);
-
-        this.listDeals.appendChild(divItem);
+    /* добавляем елемент списка заданий */
+    addTask(element) {
+        this.listDeals.insertAdjacentHTML('beforeend', element);
     }
 }
 
