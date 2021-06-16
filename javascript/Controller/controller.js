@@ -4,12 +4,12 @@ import {ModalWindow} from '/javascript/ModalWindow/modalWindow.js';
 import {ItemList} from '/javascript/elementList/elementList.js';
 
 class Controller{
-    createButton = document.getElementById('create_new_task_button');
 
     constructor(){
         this.model = new Model();
         this.modalWindow = new ModalWindow();
         this.view = new View(this.modalWindow);
+        this.createButton = document.getElementById('create_new_task_button');
         this.modalWindowClose = document.getElementById('cancel_modal_button');
         this.modalWindowAdd = document.getElementById('add_modal_id');
         this.modalTitleText = document.getElementById('modal_title_id');
@@ -72,9 +72,12 @@ class Controller{
     }
 
     _addEvent(){
-        this.listDeals.addEventListener('click', (e)=>{
-            console.log(e.target);
-        })
+        this.listDeals.addEventListener('mouseover', (e)=>{
+            if(e.target.getAttribute('id') === 'mouseover_trigger_id'){
+                console.log('text');
+            }
+            
+        }, true);
     }
 }
 
