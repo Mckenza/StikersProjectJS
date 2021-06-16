@@ -20,13 +20,13 @@ class Controller{
         this.buttonAddItem();
         this.buttonCancel();
         this.textareaFocus();
-        this._addEvent();
+        this.addEvent();
     }
 
     /* слушатель кнопки "Создать" */
     buttonCreate(){
         this.createButton.onclick = ()=>{
-            this._clearField();
+            this.clearField();
             this.view.showModalWindow();
         }
     }
@@ -34,13 +34,14 @@ class Controller{
     /* слушатель кнопки "Добавить" */
     buttonAddItem(){
         this.modalWindowAdd.onclick = ()=>{
-            const objData = {};
-            objData['title'] = this.modalTitleText.value;
-            objData['description'] = this.modalTextArea.value;
-            const newItem = new ItemList(objData['title'], objData['description']);
+            const objData = {
+                title: this.modalTitleText.value,
+                description: this.modalTextArea.value,
+            };
+            const newItem = new ItemList(objData['title'], objData['description']); // передать объект потом
             this.model.setDataItem(objData);
             this.view.addTask(newItem.create());
-            this._clearField();
+            this.clearField();
 
             this.modalWindow.close();
         }
@@ -49,7 +50,7 @@ class Controller{
     /* слушатель кнопки "Отмена" */
     buttonCancel(){
         this.modalWindowClose.onclick = ()=>{
-            this._clearField();
+            this.clearField();
             this.view.closeModalWindow();
         }
     }
@@ -59,25 +60,51 @@ class Controller{
             this.view.hidePlaceholderDescriptionModal();
         }
         this.modalTextArea.onblur = ()=>{
-            if(this.modalTextArea.value === ''){
+            if(this.modalTextArea.value){
                 this.view.showPlaceholderDescriptionModal();
             }
         }
     }
     
-    _clearField(){
+    clearField(){
         this.modalTextArea.value = '';
         this.modalTitleText.value = '';
         this.view.showPlaceholderDescriptionModal();
     }
 
-    _addEvent(){
+    addEvent(){
         this.listDeals.addEventListener('mouseover', (e)=>{
             if(e.target.getAttribute('id') === 'mouseover_trigger_id'){
-                console.log('text');
+                const parentItem = e.target.parentNode;
+                const viewButtons = parentItem.querySelector('.buttons_manage');
+                const inputTitle = parentItem.querySelector('.title_item');
+                this.view.showManageButtons(viewButtons, inputTitle);
+            }  
+        });
+
+        this.listDeals.addEventListener('mouseleave', (e)=>{
+            if(e.target.getAttribute('id') === 'mouseover_trigger_id'){
+                const parentItem = e.target.parentNode;
+                const viewButtons = parentItem.querySelector('.buttons_manage.mouseover');
+                const inputTitle = parentItem.querySelector('.title_item.mouseover');
+                this.view.hideManageButtons(viewButtons, inputTitle);
+            }  
+        }, true);           /* еще раз Прочитать про всплытия событий */
+
+        this.listDeals.addEventListener('dblclick', (e)=>{
+            if(e.target.getAttribute('id') === 'del_button_id'){
+                const item = e.target.closest('.item_for_list');
+                this.listDeals.removeChild(item);
             }
-            
-        }, true);
+        });
+
+        this.listDeals.addEventListener('click', (e)=>{
+            if(e.target.getAttribute('id') === 'edit_button_id'){
+                console.log('ghbdtn');
+            }
+        })
+
+
     }
 }
 

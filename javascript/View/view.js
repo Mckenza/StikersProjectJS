@@ -31,6 +31,18 @@ class View {
     addTask(element) {
         this.listDeals.insertAdjacentHTML('beforeend', element);
     }
+
+    /* Меняем стили при наведении на элемента списка */
+    showManageButtons(buttons, title){
+        buttons.classList.add('mouseover');
+        title.classList.add('mouseover');
+    }
+
+    /* если курсор покидает элемент - стили исчезают */
+    hideManageButtons(buttons, title){
+        buttons.classList.remove('mouseover');
+        title.classList.remove('mouseover');
+    } 
 }
 
 export {View};
