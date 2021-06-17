@@ -217,10 +217,15 @@ article{
 }
 
 .edit_element .input_title{
-    height: 20%;
+    height: calc(20% - 20px);
     width: 100%;
     border: none;
+    padding-bottom: 20px;
     background-color: transparent;
+    font-family: 'Pangolin Regular';
+    color: white;
+    font-size: 30px;
+   
 }
 
 .edit_element .textarea_item{
@@ -229,6 +234,10 @@ article{
     border: none;
     background-color: transparent;
     resize: none;
+    font-size: 24px;
+    background-color: transparent;
+    font-family: 'Pangolin Regular';
+    color: white;
 }
 
 .buttons_confirm_edit{

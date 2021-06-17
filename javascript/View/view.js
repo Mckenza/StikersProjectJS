@@ -1,29 +1,27 @@
 class View {
 
-    listDeals = document.getElementById('list_elements');
-
     constructor(modalContext) {
         this.modalContext = modalContext;
+        this.listDeals = document.getElementById('list_elements');
     }
 
-    
     /* показать модальное окно */
-    showModalWindow(){
+    showModalWindow() {
         this.modalContext.open();
     }
 
     /* скрыть модальное окно */
-    closeModalWindow(){
+    closeModalWindow() {
         this.modalContext.close();
     }
 
     /* показать описание textArea */
-    showPlaceholderDescriptionModal(){
+    showPlaceholderDescriptionModal() {
         this.modalContext.showPlaceholderTextarea();
     }
 
-     /* скрыть описание textArea */
-    hidePlaceholderDescriptionModal(){
+    /* скрыть описание textArea */
+    hidePlaceholderDescriptionModal() {
         this.modalContext.hidePlaceholderTextarea();
     }
 
@@ -33,22 +31,26 @@ class View {
     }
 
     /* Меняем стили при наведении на элемента списка */
-    showManageButtons(buttons, title){
+    showManageButtons(buttons, title) {
         buttons.classList.add('mouseover');
         title.classList.add('mouseover');
     }
 
     /* если курсор покидает элемент - стили исчезают */
-    hideManageButtons(buttons, title){
+    hideManageButtons(buttons, title) {
         buttons.classList.remove('mouseover');
         title.classList.remove('mouseover');
     }
 
     /* показать поля при редактировании */
-    showEditElements(inputEditTitle, inputEditDescription){
-        inputEditTitle.classList.add('show');
-        inputEditDescription.classList.add('show');
+    showEditElements(item) {
+        item.classList.add('open');
+    }
+
+    /* скрыть поля редактирования */
+    hideEditElements(item) {
+        item.classList.remove('open');
     }
 }
 
-export {View};
+export { View };

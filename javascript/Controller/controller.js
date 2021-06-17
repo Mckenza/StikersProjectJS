@@ -34,12 +34,12 @@ class Controller{
     /* слушатель кнопки "Добавить" */
     buttonAddItem(){
         this.modalWindowAdd.onclick = ()=>{
-            const objData = {
+            const newItem = new ItemList({
                 title: this.modalTitleText.value,
                 description: this.modalTextArea.value,
-            };
-            const newItem = new ItemList(objData['title'], objData['description']); // передать объект потом
-            this.model.setDataItem(objData);
+            });
+
+            //this.model.setDataItem(objData);
             this.view.addTask(newItem.create());
             this.clearField();
 
@@ -100,18 +100,40 @@ class Controller{
 
         this.listDeals.addEventListener('click', (e)=>{
             if(e.target.getAttribute('id') === 'edit_button_id'){
-                /*
                 const parentItem = e.target.closest('.item_for_list');
-                const inputEditTitle = parentItem.querySelector('.title_item');
-                const inputEditDescription = parentItem.querySelector('.textarea_item');
-                const textTitle = inputEditTitle.textContent;
-                const textDescription = inputEditDescription.textContent;
+                const editItem = parentItem.querySelector('.edit_element');
+                const titleElement = parentItem.querySelector('.title_item');
+                const descriptionElement = parentItem.querySelector('.description_item');
                 
+                const titleContentInput = editItem.querySelector('.input_title');                // Получаем input элемент - заголовок
+                const descriptionContentTextArea = editItem.querySelector('.textarea_item');        // Получаем textarea элемент - описание
+
+                titleContentInput.value = titleElement.textContent.trim();                       // input === div content (title)
+                descriptionContentTextArea.value = descriptionElement.textContent.trim();           // textarea === div content (description)
+                const bufTitle = titleElement.textContent.trim();                                   // буферное значени заголовка
+                const bufDescription = descriptionElement.textContent.trim();                       // буферное значение описания
+                titleElement.textContent = '';                                              // очищаем div с тектом title
+                descriptionElement.textContent = '';                                        // очищаем div с текстом description
                 
-                this.view.showEditElements(inputEditTitle, inputEditDescription);
-                */
+                this.view.showEditElements(editItem);
+
+                editItem.querySelector('#button_confirm_edit_id').onclick = ()=>{
+                    titleElement.textContent = titleContentInput.value;
+                    descriptionElement.textContent = descriptionContentTextArea.value;
+                    titleContentInput.value = '';
+                    descriptionContentTextArea.value = '';
+                    this.view.hideEditElements(editItem);
+                }
+                editItem.querySelector('#button_cancel_edit_id').onclick = ()=>{
+                    titleElement.textContent = bufTitle;
+                    descriptionElement.textContent = bufDescription;
+                    this.view.hideEditElements(editItem);
+                }
+
             }
-        })
+        });
+
+
 
 
     }
