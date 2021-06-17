@@ -42,7 +42,13 @@ class View {
     hideManageButtons(buttons, title){
         buttons.classList.remove('mouseover');
         title.classList.remove('mouseover');
-    } 
+    }
+
+    /* показать поля при редактировании */
+    showEditElements(inputEditTitle, inputEditDescription){
+        inputEditTitle.classList.add('show');
+        inputEditDescription.classList.add('show');
+    }
 }
 
 export {View};

@@ -100,7 +100,16 @@ class Controller{
 
         this.listDeals.addEventListener('click', (e)=>{
             if(e.target.getAttribute('id') === 'edit_button_id'){
-                console.log('ghbdtn');
+                /*
+                const parentItem = e.target.closest('.item_for_list');
+                const inputEditTitle = parentItem.querySelector('.title_item');
+                const inputEditDescription = parentItem.querySelector('.textarea_item');
+                const textTitle = inputEditTitle.textContent;
+                const textDescription = inputEditDescription.textContent;
+                
+                
+                this.view.showEditElements(inputEditTitle, inputEditDescription);
+                */
             }
         })
 
