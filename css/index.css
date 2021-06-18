@@ -63,7 +63,6 @@ main{
     min-width: 300px;
     width: 25%;
     margin-right: 10px;
-    background-color: rgba(0, 0, 0, 0.363);
 }
 
 /* main - left_control_panel */
@@ -74,6 +73,11 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
+    background-image: url(..//img/background_create.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 .wrap_button{
@@ -97,8 +101,8 @@ main{
 
 .wrap_button span{
     font-family: 'Pangolin Regular';
-    font-size: 40px;
-    color: white;
+    font-size: 42px;
+    color: black;
 }
 
 /* main - article */

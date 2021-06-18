@@ -117,7 +117,26 @@ class Controller{
                 
                 this.view.showEditElements(editItem);
 
+                let timerLeave;
+                let trigger = true;
+
+                editItem.onmouseover = ()=>{
+                    clearTimeout(timerLeave);
+                }
+
+                editItem.onmouseout = ()=>{
+                    if(trigger){
+                        timerLeave = setTimeout(()=>{
+                            console.log('2');
+                            titleElement.textContent = bufTitle;
+                            descriptionElement.textContent = bufDescription;
+                            this.view.hideEditElements(editItem);
+                        }, 3000);
+                    } 
+                }
+
                 editItem.querySelector('#button_confirm_edit_id').onclick = ()=>{
+                    trigger = false;
                     titleElement.textContent = titleContentInput.value;
                     descriptionElement.textContent = descriptionContentTextArea.value;
                     titleContentInput.value = '';
@@ -125,11 +144,11 @@ class Controller{
                     this.view.hideEditElements(editItem);
                 }
                 editItem.querySelector('#button_cancel_edit_id').onclick = ()=>{
+                    trigger = false;
                     titleElement.textContent = bufTitle;
                     descriptionElement.textContent = bufDescription;
                     this.view.hideEditElements(editItem);
                 }
-
             }
         });
 
