@@ -6,7 +6,6 @@ import {ItemList} from '/javascript/elementList/elementList.js';
 class Controller{
 
     constructor(){
-        this.model = new Model();
         this.modalWindow = new ModalWindow();
         this.view = new View(this.modalWindow);
         this.createButton = document.getElementById('create_new_task_button');
@@ -15,6 +14,7 @@ class Controller{
         this.modalTitleText = document.getElementById('modal_title_id');
         this.modalTextArea = document.getElementById('textarea_modal_id');
         this.listDeals = document.getElementById('list_elements');
+        this.model = new Model(this.listDeals, this.view);
         this.modalTextArea.value = '';                                          // для того, что б курсор, при вызове окна, был в самом углу
         this.buttonCreate();
         this.buttonAddItem();
@@ -34,13 +34,16 @@ class Controller{
     /* слушатель кнопки "Добавить" */
     buttonAddItem(){
         this.modalWindowAdd.onclick = ()=>{
-            const newItem = new ItemList({
+            
+            const id = this.model.setIdElement();
+            const objData = {
                 title: this.modalTitleText.value,
                 description: this.modalTextArea.value,
-            });
-
-            //this.model.setDataItem(objData);
-            this.view.addTask(newItem.create());
+                id: id,
+            };
+            const newItem = new ItemList(objData);
+            this.model.setDataItem(objData);      
+            this.view.addTask(newItem.create());                   
             this.clearField();
 
             this.modalWindow.close();
@@ -94,6 +97,9 @@ class Controller{
         this.listDeals.addEventListener('dblclick', (e)=>{
             if(e.target.getAttribute('id') === 'del_button_id'){
                 const item = e.target.closest('.item_for_list');
+                const getId = Number(item.getAttribute('id'));
+                this.model.delItemFromObj(getId);
+                this.model.setDelId(getId);
                 this.listDeals.removeChild(item);
             }
         });
@@ -117,7 +123,7 @@ class Controller{
                 
                 this.view.showEditElements(editItem);
 
-                let timerLeave;
+                let timerLeave;                                                             // таймер "без курсора"
                 let trigger = true;
 
                 editItem.onmouseover = ()=>{
@@ -141,6 +147,11 @@ class Controller{
                     descriptionElement.textContent = descriptionContentTextArea.value;
                     titleContentInput.value = '';
                     descriptionContentTextArea.value = '';
+                    this.model.editItem({
+                        title: titleElement.textContent,
+                        description: descriptionElement.textContent,
+                        id: parentItem.getAttribute('id'),
+                    });
                     this.view.hideEditElements(editItem);
                 }
                 editItem.querySelector('#button_cancel_edit_id').onclick = ()=>{

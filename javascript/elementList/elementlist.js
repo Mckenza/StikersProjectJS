@@ -3,11 +3,12 @@ class ItemList {
     constructor(obj) {
         this.title = obj.title;
         this.description = obj.description;
+        this.id = obj.id;
     }
     textData = '14.04.2021 16:53';
 
     create() {
-        const item = `<div class="item_for_list">
+        const item = `<div class="item_for_list" id="${this.id}">
             <div class="title_item" id="title_item_id">
                 ${this.title}
             </div>

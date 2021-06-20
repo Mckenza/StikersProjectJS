@@ -25,7 +25,7 @@ class View {
         this.modalContext.hidePlaceholderTextarea();
     }
 
-    /* добавляем елемент списка заданий */
+    /* добавляем элемент списка заданий */
     addTask(element) {
         this.listDeals.insertAdjacentHTML('beforeend', element);
     }
