@@ -69,7 +69,29 @@ class Model{
             const element = new ItemList(JSON.parse(localStorage.getItem(item))).create();
             this.contextView.addTask(element);
         })
-    }   
+    }
+    
+    /* Текущая дата */
+    getDate(isEdit){
+        let formDate;
+        const date = new Date(Date.now());
+        let day = date.getDate();
+        let mouth = date.getMonth() + 1;
+        const year = date.getFullYear();
+        if(day < 10){
+            day = '0' + day;
+        }
+        if(mouth < 10){
+            mouth = '0' + mouth;
+        }
+        if(isEdit){
+            formDate = `Изменен: ${day}.${mouth}.${year}`;
+        } else {
+            formDate = `Дата создания: ${day}.${mouth}.${year}`;
+        }
+        
+        return formDate;
+    }
 }
 
 export {Model};

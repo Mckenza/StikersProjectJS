@@ -34,12 +34,13 @@ class Controller{
     /* слушатель кнопки "Добавить" */
     buttonAddItem(){
         this.modalWindowAdd.onclick = ()=>{
-            
             const id = this.model.setIdElement();
+            const date = this.model.getDate(false);
             const objData = {
                 title: this.modalTitleText.value,
                 description: this.modalTextArea.value,
                 id: id,
+                date: date,
             };
             const newItem = new ItemList(objData);
             this.model.setDataItem(objData);      
@@ -107,6 +108,7 @@ class Controller{
         this.listDeals.addEventListener('click', (e)=>{
             if(e.target.getAttribute('id') === 'edit_button_id'){
                 const parentItem = e.target.closest('.item_for_list');
+                const date = parentItem.querySelector('.time_create');
                 const editItem = parentItem.querySelector('.edit_element');
                 const titleElement = parentItem.querySelector('.title_item');
                 const descriptionElement = parentItem.querySelector('.description_item');
@@ -147,11 +149,14 @@ class Controller{
                     descriptionElement.textContent = descriptionContentTextArea.value;
                     titleContentInput.value = '';
                     descriptionContentTextArea.value = '';
+                    const dateNow = this.model.getDate(true);
                     this.model.editItem({
                         title: titleElement.textContent,
                         description: descriptionElement.textContent,
                         id: parentItem.getAttribute('id'),
+                        date: dateNow,
                     });
+                    date.textContent = dateNow; 
                     this.view.hideEditElements(editItem);
                 }
                 editItem.querySelector('#button_cancel_edit_id').onclick = ()=>{
@@ -162,10 +167,6 @@ class Controller{
                 }
             }
         });
-
-
-
-
     }
 }
 

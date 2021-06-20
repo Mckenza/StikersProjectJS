@@ -4,8 +4,8 @@ class ItemList {
         this.title = obj.title;
         this.description = obj.description;
         this.id = obj.id;
+        this.date = obj.date;
     }
-    textData = '14.04.2021 16:53';
 
     create() {
         const item = `<div class="item_for_list" id="${this.id}">
@@ -16,7 +16,7 @@ class ItemList {
                 ${this.description}
             </div>
             <div class="time_create">
-                Дата создания: 14.06.2021 16:43
+                ${this.date}
             </div>
             <div class="mouseover_trigger" id="mouseover_trigger_id">
                 <div class="buttons_manage" id="buttons_manage_id">
