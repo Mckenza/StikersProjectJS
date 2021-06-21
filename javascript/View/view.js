@@ -30,6 +30,10 @@ class View {
         this.listDeals.insertAdjacentHTML('beforeend', element);
     }
 
+    clearList(){
+        this.listDeals.innerHTML = '';
+    }
+
     /* Меняем стили при наведении на элемента списка */
     showManageButtons(buttons, title) {
         buttons.classList.add('mouseover');

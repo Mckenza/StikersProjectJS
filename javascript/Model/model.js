@@ -7,7 +7,7 @@ class Model{
         this.count = localStorage.getItem('count') ? localStorage.getItem('count') : localStorage.setItem('count', 0);                
         this.delId = localStorage.getItem('delArrayId') ? JSON.parse(localStorage.getItem('delArrayId')) : localStorage.setItem('delArrayId', JSON.stringify([]));                  // массив удаленных ID
         this.safeId = localStorage.getItem('safeArrayId') ? JSON.parse(localStorage.getItem('safeArrayId')) : localStorage.setItem('safeArrayId', JSON.stringify([]));              // Массив сохраненных ID
-        this.render();
+        this.pageView();
     }
 
     setDataItem(data){
@@ -60,15 +60,43 @@ class Model{
     }
 
     /* Отображаем элементы из LocalStorage при обновлени страницы */
-    render(){
-        const IDs = JSON.parse(localStorage.getItem('safeArrayId'));                // массив сохраненных ID в правильном порядке (как создавались)
-        if(!IDs){
+    render(start, finish, array){
+        this.contextView.clearList();
+        //const IDs = JSON.parse(localStorage.getItem('safeArrayId'));                // массив сохраненных ID в правильном порядке (как создавались)
+        if(!array){
             return;
         }
+
+        for(let i = start; i <= finish; i++){
+            const element = new ItemList(JSON.parse(localStorage.getItem(array[i]))).create();
+            
+            this.contextView.addTask(element);
+        }
+/*
         IDs.forEach(item =>{
             const element = new ItemList(JSON.parse(localStorage.getItem(item))).create();
             this.contextView.addTask(element);
         })
+        */
+    }
+
+    pageView(){ 
+        const safeArrayId = JSON.parse(localStorage.getItem('safeArrayId'));
+        console.log(safeArrayId.length)
+        if(safeArrayId.length !== 0){
+            let start = 0;
+            let finish = safeArrayId.length - 1;
+    
+            if(finish > 5){
+                finish = 5;
+                this.render(start, finish, safeArrayId);
+            } else {
+                this.render(start, finish, safeArrayId)
+            }
+        } else {
+            this.contextView.clearList();
+        }
+        
     }
     
     /* Текущая дата */
@@ -77,6 +105,8 @@ class Model{
         const date = new Date(Date.now());
         let day = date.getDate();
         let mouth = date.getMonth() + 1;
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
         const year = date.getFullYear();
         if(day < 10){
             day = '0' + day;
@@ -84,10 +114,16 @@ class Model{
         if(mouth < 10){
             mouth = '0' + mouth;
         }
+        if(hours < 10){
+            hours = '0' + hours;
+        }
+        if(minutes < 10){
+            minutes = '0' + minutes;
+        }
         if(isEdit){
-            formDate = `Изменен: ${day}.${mouth}.${year}`;
+            formDate = `Изменен: ${day}.${mouth}.${year} ${hours}:${minutes}`;
         } else {
-            formDate = `Дата создания: ${day}.${mouth}.${year}`;
+            formDate = `Дата создания: ${day}.${mouth}.${year} ${hours}:${minutes}`;
         }
         
         return formDate;

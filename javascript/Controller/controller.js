@@ -42,12 +42,13 @@ class Controller{
                 id: id,
                 date: date,
             };
-            const newItem = new ItemList(objData);
-            this.model.setDataItem(objData);      
-            this.view.addTask(newItem.create());                   
+            //const newItem = new ItemList(objData);
+            this.model.setDataItem(objData);
+            this.model.pageView();
+            //this.view.addTask(newItem.create());                   
             this.clearField();
-
             this.modalWindow.close();
+
         }
     }
 
@@ -101,7 +102,8 @@ class Controller{
                 const getId = Number(item.getAttribute('id'));
                 this.model.delItemFromObj(getId);
                 this.model.setDelId(getId);
-                this.listDeals.removeChild(item);
+                this.model.pageView();
+                //this.listDeals.removeChild(item);
             }
         });
 
