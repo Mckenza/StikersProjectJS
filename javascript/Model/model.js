@@ -3,6 +3,8 @@ import {ItemList} from '/javascript/elementList/elementList.js';
 class Model{
     constructor(list, contextView){
         this.list = list;
+        this.start = 0;
+        this.finish = 5;
         this.contextView = contextView;
         this.count = localStorage.getItem('count') ? localStorage.getItem('count') : localStorage.setItem('count', 0);                
         this.delId = localStorage.getItem('delArrayId') ? JSON.parse(localStorage.getItem('delArrayId')) : localStorage.setItem('delArrayId', JSON.stringify([]));                  // массив удаленных ID
@@ -61,8 +63,7 @@ class Model{
 
     /* Отображаем элементы из LocalStorage при обновлени страницы */
     render(start, finish, array){
-        this.contextView.clearList();
-        //const IDs = JSON.parse(localStorage.getItem('safeArrayId'));                // массив сохраненных ID в правильном порядке (как создавались)
+        this.contextView.clearList(); 
         if(!array){
             return;
         }
@@ -72,31 +73,60 @@ class Model{
             
             this.contextView.addTask(element);
         }
-/*
-        IDs.forEach(item =>{
-            const element = new ItemList(JSON.parse(localStorage.getItem(item))).create();
-            this.contextView.addTask(element);
-        })
-        */
     }
 
-    pageView(){ 
+    pageNextView(){ 
         const safeArrayId = JSON.parse(localStorage.getItem('safeArrayId'));
-        console.log(safeArrayId.length)
+        const lengthArray = safeArrayId.length - 1;
+
+        if(this.finish < safeArrayId.length){
+            this.start += 6;
+            this.finish = this.start + 5 < lengthArray ? this.finish += this.start : this.finish = this.start + (lengthArray - this.start);
+            this.render(this.start, this.finish, safeArrayId);
+        } else {
+            this.render(this.start, lengthArray, safeArrayId);
+        }
+
+        if(trigger){
+
+        }
+
+        const lengthArray = safeArrayId.length - 1;
+        
+        if(lengthArray <= this.finish){
+            this.render(this.start, lengthArray, safeArrayId);
+        } else {
+
+        }
+
+
+
+        this.finish = safeArrayId.length - finish >= finish + 5 ? finish + 5 : finish + (safeArrayId.length - finish);
+
+        const items = (safeArrayId.length / 6).ceil();
+        for(let i = 1; i <= items; i++){
+            this.render(start, finish, safeArrayId);
+            start = finish + 1;
+            finish = safeArrayId.length - finish >= finish + 5 ? finish + 5 : finish + (safeArrayId.length - finish);
+        }
+
         if(safeArrayId.length !== 0){
+            const valueItems = 6;
             let start = 0;
             let finish = safeArrayId.length - 1;
     
             if(finish > 5){
                 finish = 5;
                 this.render(start, finish, safeArrayId);
+                start += valueItems;
+                finish = finish +
+
             } else {
                 this.render(start, finish, safeArrayId)
             }
         } else {
             this.contextView.clearList();
         }
-        
     }
     
     /* Текущая дата */

@@ -110,6 +110,7 @@ main{
 article{
     width: calc(75% - 10px);
     height: 100%;
+    position: relative;
 }
 
 .wrap_article{
@@ -122,6 +123,29 @@ article{
     justify-content: space-between;
     overflow-y: scroll;
 }
+
+.buttons_next_and_previous{
+    height: 54px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.buttons_next_and_previous div{
+    height: 100%;
+    width: 250px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.buttons_next_and_previous div input{
+    height: 100%;
+    width: 45%;
+}
+
 
 .item_for_list{
     height: 300px;

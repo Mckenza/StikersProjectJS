@@ -1,7 +1,7 @@
 import {View} from '/javascript/View/view.js';
 import {Model} from '/javascript/Model/model.js';
 import {ModalWindow} from '/javascript/ModalWindow/modalWindow.js';
-import {ItemList} from '/javascript/elementList/elementList.js';
+//import {ItemList} from '/javascript/elementList/elementList.js';
 
 class Controller{
 
@@ -42,10 +42,8 @@ class Controller{
                 id: id,
                 date: date,
             };
-            //const newItem = new ItemList(objData);
             this.model.setDataItem(objData);
-            this.model.pageView();
-            //this.view.addTask(newItem.create());                   
+            this.model.pageView();                 
             this.clearField();
             this.modalWindow.close();
 
@@ -57,6 +55,20 @@ class Controller{
         this.modalWindowClose.onclick = ()=>{
             this.clearField();
             this.view.closeModalWindow();
+        }
+    }
+
+    /* Кнопка - следующая страница */
+    nextPageButton(){
+        document.getElementById('next_id').onclick = () =>{
+            this.model.pageNextView();
+        }
+    }
+
+    /* Кнопка - предыдущая страница */
+    previousPageButton(){
+        document.getElementById('previous_id').onclick = () =>{
+            this.model.pageView(false);
         }
     }
 

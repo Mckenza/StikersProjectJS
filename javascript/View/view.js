@@ -3,6 +3,8 @@ class View {
     constructor(modalContext) {
         this.modalContext = modalContext;
         this.listDeals = document.getElementById('list_elements');
+        this.buttonNext = document.getElementById('next_id');
+        this.buttonPrevious = document.getElementById('previous_id');
     }
 
     /* показать модальное окно */
@@ -30,6 +32,7 @@ class View {
         this.listDeals.insertAdjacentHTML('beforeend', element);
     }
 
+    /* очистить Div со всеми стикерами (для перерисовки) */
     clearList(){
         this.listDeals.innerHTML = '';
     }
@@ -54,6 +57,16 @@ class View {
     /* скрыть поля редактирования */
     hideEditElements(item) {
         item.classList.remove('open');
+    }
+
+    /* скрыть кнопку next */
+    hideNextButton(){
+
+    }
+
+    /* скрыть кнопку previous */
+    hidePreviousButton(){
+        
     }
 }
 
