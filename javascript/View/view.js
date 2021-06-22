@@ -33,7 +33,7 @@ class View {
     }
 
     /* очистить Div со всеми стикерами (для перерисовки) */
-    clearList(){
+    clearList() {
         this.listDeals.innerHTML = '';
     }
 
@@ -60,13 +60,23 @@ class View {
     }
 
     /* скрыть кнопку next */
-    hideNextButton(){
+    hideNextButton() {
+        this.buttonNext.classList.remove('showButtonNextAndPrev');
+    }
 
+    /* Показать кнопку next */
+    showNextButton() {
+        this.buttonNext.classList.add('showButtonNextAndPrev');
     }
 
     /* скрыть кнопку previous */
-    hidePreviousButton(){
-        
+    hidePreviousButton() {
+        this.buttonPrevious.classList.remove('showButtonNextAndPrev');
+    }
+
+    /* показать кнопку previous */
+    showPreviousButton() {
+        this.buttonPrevious.classList.add('showButtonNextAndPrev');
     }
 }
 

@@ -135,17 +135,36 @@ article{
 
 .buttons_next_and_previous div{
     height: 100%;
-    width: 250px;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
+    position: relative;
+
 }
 
-.buttons_next_and_previous div input{
+.next_id_class{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
     height: 100%;
-    width: 45%;
+    display: none;
+    border: none;
 }
 
+.previous_class{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 100%;
+    display: none;
+}
+
+.showButtonNextAndPrev{
+    display: block;
+}
 
 .item_for_list{
     height: 300px;

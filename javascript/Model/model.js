@@ -1,18 +1,18 @@
-import {ItemList} from '/javascript/elementList/elementList.js';
+import { ItemList } from '/javascript/elementList/elementList.js';
 
-class Model{
-    constructor(list, contextView){
+class Model {
+    constructor(list, contextView) {
         this.list = list;
         this.start = 0;
         this.finish = 5;
         this.contextView = contextView;
-        this.count = localStorage.getItem('count') ? localStorage.getItem('count') : localStorage.setItem('count', 0);                
+        this.count = localStorage.getItem('count') ? localStorage.getItem('count') : localStorage.setItem('count', 0);
         this.delId = localStorage.getItem('delArrayId') ? JSON.parse(localStorage.getItem('delArrayId')) : localStorage.setItem('delArrayId', JSON.stringify([]));                  // массив удаленных ID
         this.safeId = localStorage.getItem('safeArrayId') ? JSON.parse(localStorage.getItem('safeArrayId')) : localStorage.setItem('safeArrayId', JSON.stringify([]));              // Массив сохраненных ID
-        this.pageView();
+        this.pageView(true);
     }
 
-    setDataItem(data){
+    setDataItem(data) {
         localStorage.setItem(data.id, JSON.stringify(data));                            // Добавляем в локал элемент списка в формате JSON
 
         const buffSafeArray = JSON.parse(localStorage.getItem('safeArrayId'));          // Получаем массив сохраненных ID из localStorage
@@ -31,17 +31,17 @@ class Model{
             let countBuff = Number(localStorage.getItem('count'));
             countBuff++;
             localStorage.setItem('count', countBuff)
-            return countBuff;        
+            return countBuff;
         }
     }
 
-    setDelId(delId){                                                                    
+    setDelId(delId) {
         const buffDelArray = JSON.parse(localStorage.getItem('delArrayId'));            // Получаем массив удаленных ID из localStorage
         const buffSafeArray = JSON.parse(localStorage.getItem('safeArrayId'));          // Получаем массив сохраненных ID из localStorage
         buffDelArray.push(delId);                                                       // Добавляем в массив удаленный ID
 
-        for(let i = 0; i < buffSafeArray.length; i++){                                    
-            if(buffSafeArray[i] === delId){                                             // Удаляем "Удаленнный ID" из массива сохраненных (текущих);
+        for (let i = 0; i < buffSafeArray.length; i++) {
+            if (buffSafeArray[i] === delId) {                                             // Удаляем "Удаленнный ID" из массива сохраненных (текущих);
                 buffSafeArray.splice(i, 1);
                 break;
             }
@@ -52,85 +52,74 @@ class Model{
     }
 
     /* Удаляем из Localstorage элемент по ID */
-    delItemFromObj(id){
-        localStorage.removeItem(id);                                                   
+    delItemFromObj(id) {
+        localStorage.removeItem(id);
     }
 
     /* Редактируем (перезаписываем) элемент в localStorage */
-    editItem(obj){
-        localStorage.setItem(obj.id, JSON.stringify(obj));                          
+    editItem(obj) {
+        localStorage.setItem(obj.id, JSON.stringify(obj));
     }
 
     /* Отображаем элементы из LocalStorage при обновлени страницы */
-    render(start, finish, array){
-        this.contextView.clearList(); 
-        if(!array){
+    render(start, finish, array) {
+        this.contextView.clearList();
+        if (!array) {
             return;
         }
 
-        for(let i = start; i <= finish; i++){
+        for (let i = start; i <= finish; i++) {
             const element = new ItemList(JSON.parse(localStorage.getItem(array[i]))).create();
-            
+
             this.contextView.addTask(element);
         }
     }
 
-    pageNextView(){ 
+    /* какую страницу отрисовать */
+    pageView(trig = false) {
+        const safeArrayId = JSON.parse(localStorage.getItem('safeArrayId'));
+        const lengthArray = safeArrayId.length - 1;
+        if (trig) {
+            this.start = 0;
+            this.finish = 5;
+        }
+
+        if (lengthArray <= this.finish) {
+            this.render(this.start, lengthArray, safeArrayId);
+            this.contextView.hideNextButton();
+        } else {
+            this.render(this.start, this.finish, safeArrayId);
+            this.contextView.showNextButton();
+        }
+
+        if (this.start > 0) {
+            this.contextView.showPreviousButton();
+        } else {
+            this.contextView.hidePreviousButton();
+        }
+    }
+
+    /* реакция на нажатия кнопок next и previous */
+    setStart(trigger) {
         const safeArrayId = JSON.parse(localStorage.getItem('safeArrayId'));
         const lengthArray = safeArrayId.length - 1;
 
-        if(this.finish < safeArrayId.length){
+        if (trigger) {
             this.start += 6;
-            this.finish = this.start + 5 < lengthArray ? this.finish += this.start : this.finish = this.start + (lengthArray - this.start);
-            this.render(this.start, this.finish, safeArrayId);
+            console.log(this.start);
+            this.finish = lengthArray - this.finish > 5 ? this.finish += 6 : this.finish = lengthArray;
+            console.log(this.finish);
+            this.pageView();
         } else {
-            this.render(this.start, lengthArray, safeArrayId);
-        }
-
-        if(trigger){
-
-        }
-
-        const lengthArray = safeArrayId.length - 1;
-        
-        if(lengthArray <= this.finish){
-            this.render(this.start, lengthArray, safeArrayId);
-        } else {
-
-        }
-
-
-
-        this.finish = safeArrayId.length - finish >= finish + 5 ? finish + 5 : finish + (safeArrayId.length - finish);
-
-        const items = (safeArrayId.length / 6).ceil();
-        for(let i = 1; i <= items; i++){
-            this.render(start, finish, safeArrayId);
-            start = finish + 1;
-            finish = safeArrayId.length - finish >= finish + 5 ? finish + 5 : finish + (safeArrayId.length - finish);
-        }
-
-        if(safeArrayId.length !== 0){
-            const valueItems = 6;
-            let start = 0;
-            let finish = safeArrayId.length - 1;
-    
-            if(finish > 5){
-                finish = 5;
-                this.render(start, finish, safeArrayId);
-                start += valueItems;
-                finish = finish +
-
-            } else {
-                this.render(start, finish, safeArrayId)
-            }
-        } else {
-            this.contextView.clearList();
+            this.finish = this.start - 1;
+            this.start -= 6;
+            console.log(this.finish);
+            this.pageView();
         }
     }
-    
+
     /* Текущая дата */
-    getDate(isEdit){
+    getDate(isEdit) {
         let formDate;
         const date = new Date(Date.now());
         let day = date.getDate();
@@ -138,26 +127,26 @@ class Model{
         let hours = date.getHours();
         let minutes = date.getMinutes();
         const year = date.getFullYear();
-        if(day < 10){
+        if (day < 10) {
             day = '0' + day;
         }
-        if(mouth < 10){
+        if (mouth < 10) {
             mouth = '0' + mouth;
         }
-        if(hours < 10){
+        if (hours < 10) {
             hours = '0' + hours;
         }
-        if(minutes < 10){
+        if (minutes < 10) {
             minutes = '0' + minutes;
         }
-        if(isEdit){
+        if (isEdit) {
             formDate = `Изменен: ${day}.${mouth}.${year} ${hours}:${minutes}`;
         } else {
             formDate = `Дата создания: ${day}.${mouth}.${year} ${hours}:${minutes}`;
         }
-        
+
         return formDate;
     }
 }
 
-export {Model};
+export { Model };
