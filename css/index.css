@@ -29,7 +29,10 @@ header{
     height: 50px;
     width: 1400px;
     margin: 0 auto;
-    background-color: rgba(0, 0, 0, 0.137);
+    background-image: url(../img/header.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .logo{
@@ -241,7 +244,7 @@ article{
 
 .title_item{
     height: 20%;
-    width: 100%;         /* изменить при наведении */
+    width: 100%;         
     position: relative;
     z-index: 1;
     overflow: hidden;
@@ -268,9 +271,9 @@ article{
     bottom: 0;
     left: 0;
     right: 0;
-    display: none;          /* менять при редактировании */
+    display: none;          
     flex-direction: column;
-    z-index: 0;             /* менять при редактировании */
+    z-index: 0;             
 }
 
 .edit_element .input_title{
@@ -495,16 +498,14 @@ article{
 }
 
 
-
-
-
-
-
-
 /* footer */
 
 footer{
     height: 70px;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.137);
+    width: 1400px;
+    margin: 0 auto;
+    background-image: url(../img/footer.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }

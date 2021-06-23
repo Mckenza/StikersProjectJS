@@ -106,14 +106,11 @@ class Model {
 
         if (trigger) {
             this.start += 6;
-            console.log(this.start);
             this.finish = lengthArray - this.finish > 5 ? this.finish += 6 : this.finish = lengthArray;
-            console.log(this.finish);
             this.pageView();
         } else {
             this.finish = this.start - 1;
             this.start -= 6;
-            console.log(this.finish);
             this.pageView();
         }
     }
