@@ -16,7 +16,7 @@ class Model {
         localStorage.setItem(data.id, JSON.stringify(data));                            // Добавляем в локал элемент списка в формате JSON
 
         const buffSafeArray = JSON.parse(localStorage.getItem('safeArrayId'));          // Получаем массив сохраненных ID из localStorage
-        buffSafeArray.push(data.id);                                                    // Добавляем в буферный массив новый ID
+        buffSafeArray.unshift(data.id);                                                    // Добавляем в буферный массив новый ID
         localStorage.setItem('safeArrayId', JSON.stringify(buffSafeArray));             // "перезаписываем" массив уже с новым ID; 
     }
 

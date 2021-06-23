@@ -120,7 +120,7 @@ article{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     overflow-y: scroll;
 }
 
@@ -149,6 +149,11 @@ article{
     right: 0;
     width: 120px;
     height: 100%;
+    background-color: transparent;
+    background-image: url(../img/nextButton.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
     display: none;
     border: none;
 }
@@ -157,9 +162,15 @@ article{
     position: absolute;
     top: 0;
     left: 0;
+    background-color: transparent;
+    background-image: url(../img/prevousButton.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
     width: 120px;
     height: 100%;
     display: none;
+    border: none;
 }
 
 .showButtonNextAndPrev{
